@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+}
+
+h1 {
+    color: #2c3e50;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+.project-list {
+    list-style: none;
+    padding: 0;
+}
+
+.project-list li {
+    margin-bottom: 10px;
+}
+
+/* Nav bar styles */
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c3e50;
+    padding: 16px 32px;
+    color: #fff;
+    margin-bottom: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.navbar-background {
+    background: #2c3e50;
+    width: 100vw;                /* Full viewport width */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;          /* Stretch edge-to-edge */
+    margin-right: -50vw;
+    min-width: 100vw;
+    box-sizing: border-box;
+    padding: 0;
+    /* Remove height: 100%; to avoid extra space */
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 32px;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.navbar a:hover {
+    color: #f39c12;
+}
+
+.sample-section {
+    margin: 40px 0;
+}
+
+.logo {
+    width: 70px;  
+    height: auto; 
+    margin-right: 5px;
+}
+
+.navbar-titles {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.portfolio-title {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.studio-title {
+    font-size: 1em;
+    color: #ccc;
+}
+
+.T1st-Display {
+    display: flex;
+    margin-bottom: 40px;
+    width: 1040px;
+}
+
+.T1st-Display-Image {
+    flex: 2;
+    margin-right: 20px;
+    width: 720px;
+    height: auto;
+    max-width: 100%;
+}
+
+.T1st-Display-Text {
+    flex: 2;
+    width: 320px;
+}
+
+.T2nd-Display {
+    display: flex;
+    margin-bottom: 40px;
+    width: 1040px;
+}
+
+.T2nd-Display-Image {
+    flex: 2;
+    margin-right: 20px;
+    width: 720px;
+    height: auto;
+    max-width: 100%;
+}
+
+.T2nd-Display-Text {
+    flex: 2;
+    width: 320px;
+}
