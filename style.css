@@ -1,6 +1,91 @@
 body {
     font-family: Arial, sans-serif;
     margin: 40px;
+    background-color: #000; /* dark page background behind the white content panel */
+    color: #111; /* keep default text legible on white panel; page-level text uses panel */
+}
+/* White content panel that sits above the background collage */
+.content-panel {
+    background: #ffffff;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 28px 28px 40px 28px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+    border-radius: 6px;
+    position: relative; /* sits above bg-layer and before pseudo-layer */
+    z-index: 2;
+}
+
+/* On very small screens, reduce padding so the content remains comfortable */
+@media (max-width: 480px) {
+    .content-panel { padding: 18px; border-radius: 0; }
+}
+
+/* Layered background: add an extra background layer underneath the page content.
+   Uses multiple images (order = front-most to back-most). Adjust the image
+   filenames, positions and sizes below to compose your collage. */
+:root {
+    --bg-layer-opacity: 0.28; /* control visibility of the image layer */
+    --bg-layer-brightness: 0.36; /* lower = darker collage (0.0 - 1.0) */
+}
+
+body.has-bg-layer::before {
+    content: "";
+    position: fixed; /* covers the viewport */
+    inset: 0;
+    z-index: -1; /* place behind page content */
+    pointer-events: none;
+    /* multiple background images: list from top to bottom */
+    background-image: url("Imgs/PosterArt.png"), url("Imgs/CompanyLogo_Smallest Logo.webp");
+    background-repeat: no-repeat, repeat;
+    background-position: center top, right bottom;
+    background-size: cover, 180px;
+    opacity: var(--bg-layer-opacity);
+    filter: saturate(0.95) blur(0px);
+}
+
+/* HTML-based background layer: use this if you want a collage made of many
+   individually-positioned images. The `.bg-layer` element is inserted in
+   `index.html` and contains multiple <img> children with class `.bg-item`.
+   Images are positioned absolutely inside the fixed layer so they sit behind
+   the page content and scale responsively. */
+.bg-layer {
+    position: fixed;
+    inset: 0;
+    z-index: -2; /* behind the pseudo background and content */
+    pointer-events: none;
+    overflow: hidden;
+    /* dim the collage so it doesn't compete with the main content */
+    filter: brightness(var(--bg-layer-brightness)) contrast(0.96) saturate(0.95);
+    opacity: 0.98;
+    background-color: #000; /* black backdrop behind collage images */
+}
+.bg-layer .bg-item {
+    position: absolute;
+    display: block;
+    max-width: 45%;
+    height: auto;
+    opacity: 0.95;
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+/* sample placements for the three demo items; tweak percentages and rotation */
+.bg-item-1 { left: 3%; top: 6%; width: 46%; transform: rotate(-1deg); }
+.bg-item-2 { right: 6%; top: 12%; width: 30%; transform: rotate(2deg); opacity: 0.9; }
+.bg-item-3 { left: 50%; bottom: 8%; width: 22%; transform: translateX(-30%) rotate(-4deg); opacity: 0.6; }
+
+/* Make collage responsive: scale and reflow at breakpoints */
+@media (max-width: 1100px) {
+    .bg-item-1 { left: 2%; top: 6%; width: 55%; }
+    .bg-item-2 { right: 4%; top: 10%; width: 36%; }
+    .bg-item-3 { left: 48%; bottom: 6%; width: 28%; transform: translateX(-35%); }
+}
+@media (max-width: 800px) {
+    .bg-item-1 { left: 4%; top: 4%; width: 70%; opacity: 0.7; }
+    .bg-item-2 { display: none; } /* reduce clutter on small screens */
+    .bg-item-3 { left: 20%; bottom: 4%; width: 46%; opacity: 0.55; }
 }
 
 h1 {
@@ -32,7 +117,7 @@ section {
     margin-bottom: 40px;
     width: 100%;
     box-sizing: border-box;
-    margin-top: -40px;
+    margin-top: -70px;
 }
 .navbar-background {
     background: #2c3e50;
@@ -105,27 +190,91 @@ section {
 .T1st-Display, .T2nd-Display {
     display: flex;
     margin-bottom: 40px;
-    width: 1040px;       /* total width */
+    width: 100%;
+    max-width: 1040px;       /* total width (image + text) on large screens */
     align-items: flex-start;
     overflow: hidden;
     margin-left: auto;   /* centers the rows */
     margin-right: auto;
+    gap: 20px;
+    box-sizing: border-box;
 }
 
 .T1st-Display-Image, .T2nd-Display-Image {
-    width: 720px;
+    /* keep a fixed basis on large screens but allow shrinking on smaller viewports */
+    flex: 0 0 720px; /* don't grow, don't shrink by default, base 720px */
+    max-width: 720px;
+    min-width: 0;
+}
+
+/* Make the second display image smaller than the first */
+.T2nd-Display-Image {
+    flex: 0 0 480px; /* base 480px on large screens */
+    max-width: 480px;
 }
 
 .T1st-Display-Image img, .T2nd-Display-Image img {
     width: 100%;
     height: auto;
     display: block;
+    object-fit: contain;
 }
 
+/* Video in display boxes: behave like images (responsive and proportional) */
+.T1st-Display-Image .display-video,
+.T2nd-Display-Image .display-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain; /* use contain to keep the whole frame visible */
+    background: #000; /* black background while loading */
+}
+
+
 .T1st-Display-Text, .T2nd-Display-Text {
-    width: 320px;
+    /* flex text to take remaining space; allow it to shrink properly */
+    flex: 1 1 320px;
+    min-width: 0; /* allow text to wrap instead of forcing overflow */
     padding-left: 20px;
     box-sizing: border-box;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1100px) {
+    .T1st-Display, .T2nd-Display {
+        max-width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    /* let the image take a percentage of the row when space is limited */
+    .T1st-Display-Image, .T2nd-Display-Image {
+        flex: 0 0 60%;
+        max-width: 60%;
+    }
+    .T1st-Display-Text, .T2nd-Display-Text {
+        flex: 1 1 40%;
+        max-width: 40%;
+        padding-left: 16px;
+    }
+}
+
+@media (max-width: 800px) {
+    /* stack vertically on narrow screens */
+    .T1st-Display, .T2nd-Display {
+        flex-direction: column;
+        gap: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+    .T1st-Display-Image, .T2nd-Display-Image {
+        flex: 0 0 auto;
+        width: 100%;
+        max-width: 100%;
+    }
+    .T1st-Display-Text, .T2nd-Display-Text {
+        width: 100%;
+        padding-left: 0;
+    }
 }
 
 

@@ -6,6 +6,15 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <!-- Background collage layer: decorative images placed behind content. Edit/add <img> entries below to change the collage. -->
+    <div class="bg-layer" aria-hidden="true">
+        <img class="bg-item bg-item-1" src="Imgs/PosterArt.png" alt="" />
+        <img class="bg-item bg-item-2" src="Imgs/Artboard 12.png" alt="" />
+        <img class="bg-item bg-item-3" src="Imgs/CompanyLogo_Small Logo.webp" alt="" />
+    </div>
+
+    <!-- Main white content panel sits above the collage and keeps the content boxed -->
+    <div class="content-panel">
     <div class="navbar-background">
         <nav class="navbar">
             <div class="navbar-left">
@@ -49,7 +58,15 @@
     </div>
     <div class="T1st-Display">
         <div class="T1st-Display-Image">
-            <img src="Imgs\Artboard 12.png" alt="">
+            <!-- Screen recording / demo video for the VR Fantasy Game.
+                 Replace `Videos/vr-demo.mp4` with your recorded file. Use MP4 (H.264)
+                 and optionally provide a WebM fallback with a second <source>.
+                 The poster attribute shows a fallback image while the video loads. -->
+            <video class="display-video" controls muted loop playsinline poster="Imgs/Artboard 12.png">
+                <source src="Imgs\Screen Recording 2025-10-31 031711.mp4" type="video/mp4">
+                <!-- <source src="Videos/vr-demo.webm" type="video/webm"> -->
+                Your browser does not support the video tag. You can download the demo <a href="Videos/vr-demo.mp4">here</a>.
+            </video>
         </div>
         <div class="T1st-Display-Text">
             <h2>VR Fantasy Game</h2>
@@ -83,5 +100,6 @@
         </ul>
     </section>
 -->
+</div>
 </body>
 </html>
