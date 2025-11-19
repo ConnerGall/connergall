@@ -1,20 +1,24 @@
 body {
     font-family: Arial, sans-serif;
     margin: 40px;
-    background-color: #000; /* dark page background behind the white content panel */
-    color: #111; /* keep default text legible on white panel; page-level text uses panel */
+    /* single solid dark background for the whole site */
+    background: #161616;
+    color: #e7e7e7; /* default text color on dark background */
 }
 /* White content panel that sits above the background collage */
 .content-panel {
-    background: #ffffff;
+    /* content sits on the same dark background as the page (no separate white panel)
+       so the layout appears as a single surface except for the raised grid band */
+    background: transparent;
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
     padding: 28px 28px 40px 28px;
-    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
-    border-radius: 6px;
-    position: relative; /* sits above bg-layer and before pseudo-layer */
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
     z-index: 2;
+    color: #e7e7e7; /* ensure content text is readable on dark background */
 }
 
 /* On very small screens, reduce padding so the content remains comfortable */
@@ -60,6 +64,12 @@ body.has-bg-layer::before {
     filter: brightness(var(--bg-layer-brightness)) contrast(0.96) saturate(0.95);
     opacity: 0.98;
     background-color: #000; /* black backdrop behind collage images */
+}
+/* If the collage background should be removed site-wide, hide the bg-layer and
+   the pseudo background. This preserves the HTML but hides visual output. */
+.bg-layer,
+body.has-bg-layer::before {
+    display: none !important;
 }
 .bg-layer .bg-item {
     position: absolute;
@@ -239,6 +249,112 @@ section {
     box-sizing: border-box;
 }
 
+/* ---------- Portfolio grid (image-only cards) ---------- */
+.visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
+
+.portfolio-grid { max-width: 1200px; margin: 28px auto 36px; padding: 0 12px; box-sizing: border-box; }
+.portfolio-heading {
+    color: #ffffff;
+    text-align: center;
+    font-size: 48px;
+    font-weight: 600;
+    margin: 6px 0 24px;
+}
+.portfolio-grid .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+    gap: 18px;
+}
+
+/* Responsive column counts */
+@media (max-width: 1200px) {
+    .portfolio-grid .grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+    .portfolio-grid .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .portfolio-grid .grid { grid-template-columns: 1fr; }
+}
+.card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    text-decoration: none;
+    color: inherit;
+}
+.card-media {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* fixed visual crop ratio */
+    background: #111;
+    position: relative;
+}
+.card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* crop to fill the box */
+    display: block;
+    /* allow customizing the focal point with a CSS variable (--focus-position)
+       Usage: add inline style on the image container: style="--focus-position: 30% 20%"
+       or apply helper classes like .focus-top, .focus-right, etc. */
+    object-position: var(--focus-position, 50% 50%);
+}
+
+/* Focus helper classes for quick centering */
+.focus-center { --focus-position: 50% 50%; }
+.focus-top { --focus-position: 50% 10%; }
+.focus-bottom { --focus-position: 50% 90%; }
+.focus-left { --focus-position: 10% 50%; }
+.focus-right { --focus-position: 90% 50%; }
+.focus-top-left { --focus-position: 15% 15%; }
+.focus-top-right { --focus-position: 85% 15%; }
+.focus-bottom-left { --focus-position: 15% 85%; }
+.focus-bottom-right { --focus-position: 85% 85%; }
+
+/* Generic utility: apply cropping behavior to other image containers */
+.img-crop img { width: 100%; height: 100%; object-fit: cover; object-position: var(--focus-position, 50% 50%); display:block; }
+.card-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px 12px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 60%);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+/* Badge inside card-media (top-left) */
+.card-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 6px 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 6px;
+    text-transform: capitalize;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    pointer-events: none;
+}
+.badge-game { background: #2c7be5; }
+.badge-art  { background: #7b5cff; }
+.badge-misc { background: #6c757d; }
+.card:hover .card-title,
+.card:focus .card-title { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 600px) {
+    .portfolio-grid { padding-left: 8px; padding-right: 8px; }
+    .card-title { font-size: 0.95rem; }
+}
+
 /* Responsive breakpoints */
 @media (max-width: 1100px) {
     .T1st-Display, .T2nd-Display {
@@ -262,6 +378,30 @@ section {
     /* stack vertically on narrow screens */
     .T1st-Display, .T2nd-Display {
         flex-direction: column;
+
+/* Make the portfolio grid full-bleed edge-to-edge across the viewport */
+.portfolio-grid.full-bleed,
+.portfolio-grid.full-bleed .grid {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    max-width: none;
+}
+
+/* make the full-bleed strip use a dark grey background */
+.portfolio-grid.full-bleed {
+    background-color: #2b2b2b; /* dark grey band behind the grid */
+    padding-top: 22px;
+    padding-bottom: 22px;
+    /* raised effect */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+/* Optional: remove the content-panel padding around the full-bleed grid on small screens */
+.content-panel .portfolio-grid.full-bleed { padding-top: 0; padding-bottom: 0; }
         gap: 12px;
         padding-left: 12px;
         padding-right: 12px;
