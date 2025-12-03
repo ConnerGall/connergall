@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Rock Two — Conner Gall</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="content-panel">
+    <div class="navbar-background">
+        <nav class="navbar">
+            <div class="navbar-left">
+                <img src="Imgs/CompanyLogo_Large Logo.webp" alt="Logo" class="logo" />
+                <div class="navbar-titles">
+                    <span class="portfolio-title">Conner Gall</span>
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="index.html" class="home-link">Home</a>
+                <a href="games.html">Games</a>
+                <a href="art.html">Art</a>
+                <a href="misc.html">Misc</a>
+            </div>
+        </nav>
+    </div>
+
+    <main class="project-detail">
+        <h1>Rock Two</h1>
+        <p class="project-date">Screenshots (2025) and recording</p>
+
+        <section class="project-media">
+            <h2>Screenshots</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;">
+                <img src="Imgs/Screenshot 2025-12-03 040019.png" alt="Screenshot 2025-12-03 040019" style="width:100%;height:auto;display:block;border-radius:6px;">
+                <img src="Imgs/Screenshot 2025-12-03 040013.png" alt="Screenshot 2025-12-03 040013" style="width:100%;height:auto;display:block;border-radius:6px;">
+            </div>
+        </section>
+
+        <section class="project-media">
+            <h2>Recording</h2>
+            <!-- MKV embedded; many browsers won't play MKV. Provide download link as fallback. -->
+            <video controls muted loop playsinline poster="Imgs/Screen Recording 2025-10-31 031711.mp4" style="width:100%;max-width:900px;display:block;margin:12px auto;">
+                <!-- Prefer MP4 if available (broad browser support) -->
+                <source src="Imgs/0001-0250.mp4" type="video/mp4">
+                <!-- Fallback MKV (kept for download or in-case browser supports it) -->
+                <source src="Imgs/0001-0250.mkv" type="video/x-matroska">
+                <!-- If you later convert to MP4/WebM, list them above for better compatibility -->
+                Your browser does not support embedded MKV video. You can download the recording <a href="Imgs/0001-0250.mkv">here</a>.
+            </video>
+        </section>
+
+        <section class="project-summary">
+            <h2>Notes</h2>
+            <p>These screenshots and the long recording were captured in 2025. If playback doesn't work in your browser, convert the MKV to MP4 or WebM for broad web compatibility.</p>
+        </section>
+
+        <p><a href="index.html">← Back to Home</a></p>
+    </main>
+</div>
+</body>
+</html>
