@@ -26,28 +26,35 @@
             </div>
         </div>
         <div class="navbar-right">
-            <a href="index.html">Games</a>
+            <a href="index.html" class="home-link">Home</a>
+            <a href="games.html">Games</a>
             <a href="art.html">Art</a>
-            <a href="misc.html">Misc</a>
+            <a href="misc.html" aria-current="page">Misc</a>
         </div>
     </nav>
 </div>
-  <section id="misc">
+
+
+    <section id="misc">
     <div class = "Header">
     <h1>Miscellaneous</h1>
     <p>Welcome to the Miscellaneous page. Add your misc content here.</p>
     </div>
 
-    <div class="T1st-Display">
-        <div class="T1st-Display-Image">
-            <img src="Imgs/ProArm.jpg" alt="">
+        <!-- Filtered grid (Misc only) -->
+    <section class="portfolio-grid">
+        <h2 class="visually-hidden">Misc</h2>
+        <div class="grid">
+            <a class="card" href="proarm.html" data-category="misc">
+                <div class="card-media" style="--focus-position: 50% 12%">
+                    <img src="Imgs/ProArm.jpg" alt="Prosthetic Arm" loading="lazy">
+                    <span class="card-badge badge-misc">Misc</span>
+                </div>
+                <div class="card-title">Prosthetic Arm</div>
+            </a>
         </div>
-        <div class="T1st-Display-Text">
-            <h2>Prosthetic Arm</h2>
-            <h3>January 2025</h3>
-            <p>A 3D model of a prosthetic arm designed for a friend's prosthetic arm project (I only did the 3D model)</p>
-        </div>
-    </div>
+    </section>
+
     </section>
         </div> <!-- /.content-panel -->
 </body>

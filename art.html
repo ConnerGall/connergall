@@ -26,59 +26,55 @@
             </div>
         </div>
         <div class="navbar-right">
-            <a href="index.html">Games</a>
-            <a href="art.html">Art</a>
-            <a href="misc.html">Misc</a>
+              <a href="index.html" class="home-link">Home</a>
+              <a href="games.html">Games</a>
+              <a href="art.html" aria-current="page">Art</a>
+              <a href="misc.html">Misc</a>
         </div>
     </nav>
 </div>
-  <section id="art">
+
+
+    <section id="art">
     <div class = "Header">
     <h1>Art</h1>
     <p>Welcome to the Art page. Add your art content here.</p>
     </div>
 
-    <div class="T1st-Display">
-        <div class="T1st-Display-Image">
-            <img src="Imgs/skelton.png" alt="">
+    <!-- Filtered grid (Art only) -->
+    <section class="portfolio-grid">
+        <h2 class="visually-hidden">Art</h2>
+        <div class="grid">
+            <a class="card" href="skeleton.html" data-category="art">
+                <div class="card-media" style="--focus-position: 50% 12%">
+                    <img src="Imgs/skelton.png" alt="The Skeleton" loading="lazy">
+                    <span class="card-badge badge-art">Art</span>
+                </div>
+                <div class="card-title">The Skeleton</div>
+            </a>
+            <a class="card" href="knight-armor.html" data-category="art">
+                <div class="card-media" style="--focus-position: 50% 12%">
+                    <img src="Imgs/knightArmor.png" alt="Knight Armor" loading="lazy">
+                    <span class="card-badge badge-art">Art</span>
+                </div>
+                <div class="card-title">Knight Armor</div>
+            </a>
+            <a class="card" href="starswords.html" data-category="art">
+                <div class="card-media">
+                    <img src="Imgs/starSwords.png" alt="Star Swords" loading="lazy">
+                    <span class="card-badge badge-art">Art</span>
+                </div>
+                <div class="card-title">Star Swords</div>
+            </a>
+            <a class="card" href="longsword.html" data-category="art">
+                <div class="card-media">
+                    <img src="Imgs/longSword.png" alt="LongSword" loading="lazy">
+                    <span class="card-badge badge-art">Art</span>
+                </div>
+                <div class="card-title">LongSword</div>
+            </a>
         </div>
-        <div class="T1st-Display-Text">
-            <h2>The Skeleton</h2>
-            <h3>January 2025</h3>
-            <p>A 3D model of a skeleton that I originally created for a art compation but since then I've refined and rigged it for animation.</p>
-        </div>
-    </div>
-        <div class="T2nd-Display reverse">
-        <div class="T2nd-Display-Text">
-            <h2>Knight Armor</h2>
-            <h3>May 2025</h3>
-            <p>A model for a character of a game that I am developing.</p>
-        </div>
-        <div class="T2nd-Display-Image">
-            <img src="Imgs/knightArmor.png" alt="">
-        </div>
-    </div>
-    <div class="T1st-Display">
-        <div class="T1st-Display-Image">
-            <img src="Imgs/starSwords.png" alt="">
-        </div>
-        <div class="T1st-Display-Text">
-            <h2>Star Swords</h2>
-            <h3>May 2025</h3>
-            <p>A set of star themed swords from an experiment with procedural materials.</p>
-        </div>
-    </div>
-    <div class="T2nd-Display reverse">
-        <div class="T2nd-Display-Text">
-            <h2>LongSword</h2>
-            <h3>May 2025</h3>
-            <p>A long sword model showcasing intricate details and craftsmanship.</p>
-        </div>
-        <div class="T2nd-Display-Image">
-            <img src="Imgs/longSword.png" alt="">
-        </div>
-    </div>
     </section>
-        </div> <!-- /.content-panel -->
+   
 </body>
 </html>
